@@ -1,16 +1,8 @@
-"""Ant, simple animation demo.
-
-Exercises
-
-1. Wrap ant around screen boundaries.
-2. Make the ant leave a trail.
-3. Change the ant color based on position.
-   Hint: colormode(255); color(0, 100, 200)
-"""
-
-from random import *
-from turtle import *
-
+from random import random
+from turtle import (
+    colormode, pencolor, goto, dot, ontimer,
+    setup, hideturtle, tracer, up, done
+)
 from freegames import vector
 
 ant = vector(0, 0)
@@ -19,6 +11,10 @@ aim = vector(2, 0)
 
 def wrap(value):
     """Wrap value around -200 and 200."""
+    if value > 200:
+        return -200
+    if value < -200:
+        return 200
     return value  # TODO
 
 
@@ -31,7 +27,12 @@ def draw():
     aim.move(random() - 0.5)
     aim.rotate(random() * 10 - 5)
 
-    clear()
+    colormode(255)
+    r = int(ant.x % 255)
+    g = int(ant.y % 255)
+    b = 200
+    pencolor(r, g, b)
+
     goto(ant.x, ant.y)
     dot(4)
 
